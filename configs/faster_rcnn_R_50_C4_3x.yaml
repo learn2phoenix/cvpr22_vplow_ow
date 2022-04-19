@@ -1,0 +1,15 @@
+_BASE_: "Base-RCNN-C4.yaml"
+MODEL:
+  WEIGHTS: "weights/dino_resnet50_pretrain_changed.pth"
+        # WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl" 
+  MASK_ON: False
+  RESNETS:
+    DEPTH: 50
+  ROI_HEADS:
+    NUM_CLASSES: 20
+SOLVER:
+        # STEPS: (20000, 23000)
+        # MAX_ITER: 25000
+  STEPS: (30000, 32000)
+  MAX_ITER: 36000
+  WARMUP_ITERS: 100
