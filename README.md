@@ -13,7 +13,7 @@ pip install pandas
 ```
 
 # Downloads
-The pretrained backbones and baselines can be downloaded from the following links. They should be places in the `weights` folder for default commands to work:
+The pretrained backbones and baselines can be downloaded from the following links. The first 2 should be placed in the `weights` folder for default commands to work:
 * [ResNet-50 backbone w/o imagenet](https://drive.google.com/file/d/1izgsq_XvziyPf6tZy19PchXJPh4UVtYK/view?usp=sharing)
 * [ResNet-50 backbone w imagenet](https://drive.google.com/file/d/1v_ZsPDcMhVp1hTaKs73Kk3AI23fXATkW/view?usp=sharing)
 * [PASCAL VOC 2007 baseline w/o image](https://drive.google.com/file/d/1R-VbFrDB2RHQ4m5GUw2sA41w4lUbZ1IN/view?usp=sharing)
