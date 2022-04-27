@@ -20,8 +20,8 @@ from detectron2.evaluation import print_csv_format, inference_on_dataset
 
 from plain_train_net import Res5ROIHeadsExtraNorm
 
-
 logger = logging.getLogger("detectron2")
+
 
 def test(cfg, model):
     results = OrderedDict()
@@ -63,8 +63,9 @@ class DummyEvaluator(DatasetEvaluator):
             if "instances" in output:
                 instances = output["instances"].to(self._cpu_device)
                 prediction["instances"] = instances_to_coco_json(instances, input["image_id"])
-            if "proposals" in output:
-                prediction["proposals"] = output["proposals"].to(self._cpu_device)
+            # Commenting for current version
+            # if "proposals" in output:
+            #     prediction["proposals"] = output["proposals"].to(self._cpu_device)
             if len(prediction) > 1:
                 self._predictions.append(prediction)
 
@@ -102,8 +103,7 @@ class DummyEvaluator(DatasetEvaluator):
             with PathManager.open(file_path, "w") as f:
                 f.write(json.dumps(predictions))
                 f.flush()
-            with open(os.path.join(self._output_dir,
-                                               "preds.pkl"),"wb") as f:
+            with open(os.path.join(self._output_dir, "preds.pkl"), "wb") as f:
                 pickle.dump(all_boxes, f)
         self._results = OrderedDict()
 
