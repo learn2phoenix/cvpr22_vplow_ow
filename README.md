@@ -1,3 +1,5 @@
+# [Challenge Website](https://rssaketh.github.io/project_pages/obj_disc_new.html#workshop_challenge)
+
 # Installation
 - Create a virtual environment using conda and install pytorch (1.10.0, cuda 10.2), suitable detectron2 and a few required modules
 ```
