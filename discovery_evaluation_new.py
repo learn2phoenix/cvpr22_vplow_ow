@@ -335,13 +335,15 @@ def eval_discovery_metrics(roi_dump, gt_dump, cache_meta, all_labels,
     unknwn_auc = get_auc(unknwn_cum_pur, unknwn_cum_cov)
     print('**'*10)
     print('**'*10)
+    num_unknwn_obj = 0 if len(unknwn_num_obj) == 0 else unknwn_num_obj[-1]
     print('Unknown AUC(@{}): {}, Discovered Objects: {}, Number of Clusters: {}'.format(iou_thresh, unknwn_auc,
-          unknwn_num_obj[-1], marker))
+          num_unknwn_obj, marker))
     print('CorLoc: {}'.format(results['corloc']))
     results['unknown_auc'] = unknwn_auc
     results['unknown_cum_pur'] = unknwn_cum_pur
     results['unknown_cum_cov'] = unknwn_cum_cov
-    results['unknown_num_obj'] = unknwn_num_obj[-1]
+    results['unknown_num_obj'] = num_unknwn_obj
+
     results['number_of_clusters'] = marker
 
     results['known_auc'] = knwn_auc
