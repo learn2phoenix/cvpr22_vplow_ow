@@ -44,6 +44,8 @@ def eval_detection_metrics(det_csv_file, gt_file, mapping_needed = False, disc_r
             #print(f'cluster_id : {int(row["cluster_id"])}')
             disc_cluster_assign = disc_results['class_name'][int(row['cluster_id'])]
             coco_class_assign = coco_classes.index(disc_cluster_assign)-1
+            if coco_class_Assign == -1:
+                continue
             coco_category_id = class_mapping[coco_class_assign]
         else:
             coco_category_id = int(row['cluster_id'])
