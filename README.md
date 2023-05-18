@@ -1,4 +1,6 @@
-# Challenge Website: [here](https://rssaketh.github.io/project_pages/obj_disc_new.html#workshop_challenge)
+* Note this repo is being used for challenege hosted for VPLOW @ CVPR'23
+
+# Challenge Website: [here](https://obj-disc.github.io)
 
 # Installation
 - Create a virtual environment using conda and install pytorch (1.10.0, cuda 10.2), suitable detectron2 and a few required modules
@@ -77,7 +79,7 @@ This outputs a csv file, `diiscovery_result.csv` where each row is of the form `
 
 - The discovery method can be evaluated using the following command. It computes area under cumulative purity/coverage plots, number of objects discovered and corloc.
 ```
-python discovery_evaluation.py --result_file ./experiments/voc2007_dino_init/coco2014_train/discovery_result.csv --output_dir ./experiments/voc2007_dino_init/coco2014_train/
+python discovery_eval_mp.py --result_file ./experiments/voc2007_dino_init/coco2014_train/discovery_result.csv --output_dir ./experiments/voc2007_dino_init/coco2014_train/
  ```
 This model achieves a AuC(@0.5) of `7.40%` on the COCO 2014 train set and discovers `19` objects with a CorLoc of `92.98`. For comparison a detector trained using supervised ImageNet weights discovers `13` objects with an AuC of `5.93` and a CorLoc of `90.28`.
 
@@ -100,3 +102,10 @@ python extract_feats.py --data_path <path_to_coco_minival> --output_dir ./experi
 ```
 python predict_cluster_ids.py --box_file ./experiments/voc2007_dino_init/minival/preds.pkl --feat_file ./experiments/voc2007_dino_init/minival/feats_dino.pkl --model_file ./experiments/voc2007_dino_init/coco2014_train/kmeans_model.pkl --discovery_result_file ./experiments/voc2007_dino_init/coco2014_train/discovery_results.pkl
 ```
+
+## Note:
+For the challenge in CVRP 2023, we have made two changes in the discovery evaluation.
+
+1. We introduce a new metric, details of which can be found on the challenge page. You can find the implementation in L400 of `discovery_eval_mp.py`.
+
+2. In order to make sure that each cluster contains significant information, we introduce a cluster filtering stage. If a cluster consists of isntances spanning less than `5` images, we discard the cluster along with its elements. In other words, each cluster needs to cover atleast `5` images. This condition is implemented in L196 of `discovery_eval_mp.py`. 
